@@ -1,16 +1,15 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../config/database.js';
+import Event from './Event.js';
 
 const ElevatedUser = sequelize.define('ElevatedUser', {
   email: { type: DataTypes.STRING, allowNull: false, unique: true },
   password: { type: DataTypes.STRING, allowNull: false },
+}, {
+  tableName: 'elevated_users',
+  timestamps: true,
 });
 
-ElevatedUser.associate = (models) => {
-  ElevatedUser.belongsToMany(models.Event, {
-    through: models.ElevatedPromotion,
-    as: 'Promotions',
-  });
-};
+// Associations are defined in models/index.js
 
 export default ElevatedUser;
