@@ -1,6 +1,7 @@
 import ElevatedPromotion from '../../../models/ElevatedPromotion';
 import Event from '../../../models/Event';
 import { getSessionUserId } from '../../../utils/auth';
+import ElevatedUser from '../../../models/ElevatedUser';
 
 export default async function promoteHandler(req, res) {
   if (req.method !== 'POST') {
@@ -20,6 +21,15 @@ export default async function promoteHandler(req, res) {
       return res.status(401).json({ message: 'Unauthorized' });
     }
 
+    console.log('User ID:', userId);
+    console.log('Event ID:', eventId);
+
+    // Check if the user exists in the elevated_users table
+    const user = await ElevatedUser.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found in elevated_users table.' });
+    }
+
     // Check if the promotion already exists
     const existingPromotion = await ElevatedPromotion.findOne({
       where: { UserId: userId, EventId: eventId },
@@ -30,7 +40,8 @@ export default async function promoteHandler(req, res) {
     }
 
     // Create the promotion
-    await ElevatedPromotion.create({ UserId: userId, EventId: eventId });
+    const promotion = await ElevatedPromotion.create({ UserId: userId, EventId: eventId });
+    console.log('Promotion created:', promotion);
 
     // Increment promotion count
     const event = await Event.findByPk(eventId);
@@ -44,6 +55,6 @@ export default async function promoteHandler(req, res) {
     res.status(200).json({ message: 'Event promoted successfully' });
   } catch (error) {
     console.error('Promotion error:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: 'Internal server error', error: error.message });
   }
 }

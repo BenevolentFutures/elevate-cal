@@ -32,8 +32,8 @@ export default async function loginHandler(req, res) {
 
     // Set the token in an HTTP-only cookie
     res.setHeader('Set-Cookie', serialize('token', token, { httpOnly: true, path: '/' }));
-    return res.status(200).json({ message: 'Login successful' });
-  } catch (error) {
+    return res.status(200).json({ message: 'Login successful', userId: user.id });
+    } catch (error) {
     console.error('Login error:', error);
     return res.status(500).json({ message: 'Internal server error' });
   }
