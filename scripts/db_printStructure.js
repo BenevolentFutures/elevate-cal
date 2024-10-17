@@ -1,7 +1,11 @@
 import sequelize from '../config/database.js';
 import User from '../models/User.js';
 import Event from '../models/Event.js';
-import Promotion from '../models/Promotion.js';
+import Group from '../models/Group.js';
+import HostInfo from '../models/HostInfo.js';
+import ElevatedUser from '../models/ElevatedUser.js';
+import ElevatedPromotion from '../models/ElevatedPromotion.js';
+import ElevatedUserSetting from '../models/ElevatedUserSetting.js';
 
 async function printDatabaseStructure() {
   try {
@@ -32,7 +36,10 @@ async function printDatabaseStructure() {
       } else {
         console.log('  No associations');
       }
-      console.log('\n');
+
+      // Add code to print the number of rows in each table
+      const rowCount = await model.count();
+      console.log(`Number of rows: ${rowCount}\n`);
     }
 
   } catch (error) {

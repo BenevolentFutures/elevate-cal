@@ -23,4 +23,4 @@ const ElevatedUserSetting = sequelize.define('ElevatedUserSetting', {
 ElevatedUserSetting.belongsTo(ElevatedUser, { foreignKey: 'userId' });
 ElevatedUser.hasOne(ElevatedUserSetting, { foreignKey: 'userId' });
 
-export default ElevatedUserSetting;
+export default ElevatedUserSetting; 

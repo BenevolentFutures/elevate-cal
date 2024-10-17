@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start",
+    "start": "NODE_ENV=production node server.js",
     "lint": "next lint",
     "test-db": "node testConnection.js",
     "sync-models": "node models/syncModels.js"
@@ -17,6 +17,7 @@
     "esm": "^3.2.25",
     "mysql2": "^3.11.3",
     "next": "14.2.15",
+    "node-cron": "^3.0.3",
     "react": "^18",
     "react-dom": "^18",
     "sequelize": "^6.37.4"
