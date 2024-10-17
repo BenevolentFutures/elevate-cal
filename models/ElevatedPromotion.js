@@ -1,26 +1,23 @@
-import { DataTypes } from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
 import sequelize from '../config/database.js';
-import ElevatedUser from './ElevatedUser.js';
-import Event from './Event.js';
 
-const ElevatedPromotion = sequelize.define('ElevatedPromotion', {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
+class ElevatedPromotion extends Model {}
+
+ElevatedPromotion.init(
+  {
+    UserId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+    },
+    EventId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+    },
   },
-  promoted_at: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW
+  {
+    sequelize,
+    modelName: 'ElevatedPromotion',
   }
-}, {
-  tableName: 'elevated_promotions'
-});
-
-ElevatedPromotion.belongsTo(ElevatedUser, { foreignKey: 'userId' });
-ElevatedPromotion.belongsTo(Event, { foreignKey: 'eventId' });
-
-ElevatedUser.hasMany(ElevatedPromotion, { foreignKey: 'userId' });
-Event.hasMany(ElevatedPromotion, { foreignKey: 'eventId' });
+);
 
 export default ElevatedPromotion;
