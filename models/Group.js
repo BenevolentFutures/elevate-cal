@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../config/database.js';
 
-const User = sequelize.define('User', {
+const Group = sequelize.define('Group', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -10,9 +10,9 @@ const User = sequelize.define('User', {
   handle: DataTypes.STRING,
   username: DataTypes.STRING,
   nickname: DataTypes.STRING,
-  image_url: DataTypes.STRING
+  timezone: DataTypes.STRING
 }, {
-  tableName: 'users'
+  tableName: 'groups'
 });
 
-export default User;
+export default Group;

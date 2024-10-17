@@ -1,7 +1,11 @@
 import sequelize from '../config/database.js';
 import User from './User.js';
+import Group from './Group.js';
 import Event from './Event.js';
-import Promotion from './Promotion.js';
+import HostInfo from './HostInfo.js';
+import ElevatedUser from './ElevatedUser.js';
+import ElevatedPromotion from './ElevatedPromotion.js';
+import ElevatedUserSetting from './ElevatedUserSetting.js';
 
 async function syncModels() {
   try {

@@ -4,6 +4,7 @@ const sequelize = new Sequelize('elevated_cal', 'root', 'lanna', {
   host: 'localhost',
   dialect: 'mysql',
   port: 3306,
+  logging: console.log,
 });
 
 export const testConnection = async () => {
